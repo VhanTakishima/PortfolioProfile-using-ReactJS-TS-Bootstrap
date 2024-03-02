@@ -8,10 +8,13 @@
 function Nav() {
   return (
     <nav className="navbar navbar-expand-xl bg-black bg-gradient">
-      <div className="container-fluid  justify-content-between ">
+      <div className="container-fluid ustify-content-between ">
         <p className="randomLetters text-white navbar-brand">LOVE</p>
-        <div className="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul className="nav flex-row mb-3 justify-content-xl-end navbar-nav ">
+        <div
+          className=" flex-row mb-1 justify-content-xl-end collapse navbar-collapse "
+          id="navbarNavDarkDropdown"
+        >
+          <ul className="nav navbar-nav ">
             <li className=" nav-item">
               <a
                 className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link active"
@@ -29,9 +32,9 @@ function Nav() {
                 About
               </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item dropdown-center">
               <a
-                className=" link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link dropdown-toggle"
+                className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link dropdown-toggle"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -39,8 +42,11 @@ function Nav() {
               >
                 Themes
               </a>
-              <ul className="dropdown-menu dropdown-menu-dark bg-black bg-gradient link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-                <li>
+              <ul
+                className="dropdown-menu dropdown-menu-dark bg-black bg-gradient link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                aria-labelledby="navbarDarkDropdownMenuLink"
+              >
+                <li className="nav-item dropdown">
                   <a
                     className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover dropdown-item"
                     href="#"
