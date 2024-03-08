@@ -1,40 +1,71 @@
-//  import LogoLoad from "./component/Logo.js";
-// import Container from "react-bootstrap/Container";
-// import Nav from "react-bootstrap/Nav";
-// import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
+import { useState } from "react";
+import "../styling/Nav.css";
+import Logo from "./Logo";
 
-// ReactDOM.render(LogoLoad, document.getElementById("root"));
 function Nav() {
+  const [selectedTheme, setSelectedTheme] = useState("Morph");
+
+  const themeColors = [
+    "Journal",
+    "Cyborg",
+    "Lux",
+    "Cerulean",
+    "Darkly",
+    "Simplex",
+    "Vapor",
+  ];
+
+  const handleThemeChange = (theme: any) => {
+    // Remove the previously loaded CSS file
+    const oldLink = document.getElementById("theme-stylesheet");
+    if (oldLink) {
+      oldLink.remove();
+    }
+
+    // Create a new link element to load the CSS file for the selected theme
+    const newLink = document.createElement("link");
+    newLink.rel = "stylesheet";
+    newLink.id = "theme-stylesheet";
+    newLink.href = `../../node_modules/bootswatch/dist/${theme.toLowerCase()}/bootstrap.min.css`;
+
+    // Append the new link element to the document head
+    document.head.appendChild(newLink);
+    console.log(selectedTheme);
+    //naOOC ako sa yellow squiggly lines
+    setSelectedTheme(theme);
+  };
+
+  const themeHandler = themeColors.map((theme) => (
+    <li key={theme} id={theme} onClick={() => handleThemeChange(theme)}>
+      <a className="dropdown-item" href="#">
+        {theme}
+      </a>
+    </li>
+  ));
+
   return (
-    <nav className="navbar navbar-expand-xl bg-black bg-gradient">
-      <div className="container-fluid ustify-content-between ">
-        <p className="randomLetters text-white navbar-brand">LOVE</p>
-        <div
-          className=" flex-row mb-1 justify-content-xl-end collapse navbar-collapse "
-          id="navbarNavDarkDropdown"
-        >
+    <nav className="navbar navbar-expand-md bg-primary bg-gradient">
+      <div className="container-fluid ustify-content-between navbar-left">
+        <Logo />
+        <div className=" flex-row mb-1 justify-content-md-end collapse navbar-collapse navbar-left">
           <ul className="nav navbar-nav ">
-            <li className=" nav-item">
+            <li className=" nav-item ">
               <a
-                className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link active"
+                className="nav-link text-primary-emphasis active"
                 aria-current="page"
                 href="#"
               >
                 Home
               </a>
             </li>
-            <li className="nav-item">
-              <a
-                className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link"
-                href="#"
-              >
+            <li className="nav-item ">
+              <a className="nav-link text-primary-emphasis" href="#">
                 About
               </a>
             </li>
             <li className="nav-item dropdown-center">
               <a
-                className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link dropdown-toggle"
+                className="nav-link text-primary-emphasis dropdown-toggle"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -46,73 +77,22 @@ function Nav() {
                 className="dropdown-menu dropdown-menu-dark bg-black bg-gradient link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                 aria-labelledby="navbarDarkDropdownMenuLink"
               >
-                <li className="nav-item dropdown">
-                  <a
-                    className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover dropdown-item"
-                    href="#"
-                  >
-                    Default
-                  </a>
-                </li>
-                <li>
-                  <hr className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover dropdown-divider" />
-                </li>
-                <li>
-                  <a
-                    className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover dropdown-item"
-                    href="#"
-                  >
-                    Light
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover dropdown-item"
-                    href="#"
-                  >
-                    Blue
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover dropdown-item"
-                    href="#"
-                  >
-                    Green
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover dropdown-item"
-                    href="#"
-                  >
-                    Orange
-                  </a>
-                </li>
+                {themeHandler}
               </ul>
             </li>
             <li className="nav-item">
-              <a
-                className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link"
-                href="#"
-              >
+              <a className="nav-link text-primary-emphasis" href="#">
                 Contact
               </a>
             </li>
             <li className="nav-item">
-              <a
-                className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link"
-                href="#"
-              >
+              <a className="nav-link text-primary-emphasis" href="#">
                 {" "}
                 My Mini Projects
               </a>
             </li>
             <li className="nav-item">
-              <a
-                className="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover nav-link"
-                href="#"
-              >
+              <a className="nav-link text-primary-emphasis" href="#">
                 Admin Page
               </a>
             </li>

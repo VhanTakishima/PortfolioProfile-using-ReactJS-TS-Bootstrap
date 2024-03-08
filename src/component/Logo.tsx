@@ -1,36 +1,31 @@
+import { useEffect } from "react";
+import "../styling/Nav.css";
+const CorrectWord: string[] = ["JOHN", "VHAN", "JPVC", "LIVE", "LOVE", "CODE"];
+const letters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-import React from "react"
-import { useState, useEffect } from "react"
-// import ReactDOM from "react-dom"
+let currentIndex: number = 0;
+let currentWord: string = CorrectWord[currentIndex];
+let animationInterval: number;
 
-const CorrectWord = ["John", "Vhan", "JPVC","Live","love","Code"];
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-let currentIndex = 0;
-let currentWord = CorrectWord[currentIndex];
-let animationInterval;
-
-
-
-function getRandomLetter() {
+function getRandomLetter(): string {
   return letters[Math.floor(Math.random() * 26)];
 }
 
-function startAnimation() {
-  let iteration = 0;
-  const targetElements = document.querySelectorAll(".randomLetters");
+function startAnimation(): void {
+  let iteration: number = 0;
+  const targetElements: NodeListOf<Element> =
+    document.querySelectorAll(".randomLetters");
 
   clearInterval(animationInterval);
 
   animationInterval = setInterval(() => {
     targetElements.forEach((targetElement) => {
-      targetElement.innerText = targetElement.innerText
-        .split("")
-        .map((letter, index) => {
+      targetElement.textContent = Array.from(targetElement.textContent || "")
+        .map((_letter: string, index: number) => {
+          // Use underscore to indicate unused variable
           if (index < iteration) {
             return currentWord[index];
           }
-
           return getRandomLetter();
         })
         .join("");
@@ -47,22 +42,21 @@ function startAnimation() {
   }, 60);
 }
 
-function clearWordAndProceed() {
+function clearWordAndProceed(): void {
   currentIndex = (currentIndex + 1) % CorrectWord.length;
   currentWord = CorrectWord[currentIndex];
   startAnimation();
 }
-export default function LogoLoad(){
+
+export default function Logo(): JSX.Element {
   useEffect(() => {
     startAnimation();
     return () => clearInterval(animationInterval); // Cleanup interval on unmount
   }, []); // Empty dependency array to run only once on mount
 
   return (
-    <div className="root">
-      {/* Add any JSX elements you want here */}
+    <div>
+      <p className="randomLetters text-primary-emphasis">LOVE</p>
     </div>
   );
 }
-
-// ReactDOM.render(startAnimation(),document.getElementsByClassName("root"));
