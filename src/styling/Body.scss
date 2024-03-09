@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.body-whole {
+    margin-top: 40px !important;
+    padding-bottom: 50px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    
+}
+
+h1
+{
+    font-family: Noto Sans, sans-serif !important;
+    font-size: 50px !important;
+}
+h2 
+{
+    font-family: Noto Sans, sans-serif !important;
+    font-size: 40px !important;
+}
+h6
+{
+    font-family: Noto Sans, sans-serif !important;
+    font-size: 14px !important;
+}
+.text-primary{
+    font-weight: bolder !important;
+}
+
+.img-fluid{
+width:100%;
+border-radius: 75px;
+
+}
+.leftColumn{
+margin-left: 20px;
+}
+.rightColumn{
+
+    margin-left: 100px;
+}
+
+.btn{
+    border:none;
+    outline:none;
+}

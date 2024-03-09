@@ -1,18 +1,25 @@
 import { useState } from "react";
 import "../styling/Nav.css";
 import Logo from "./Logo";
+import "../../node_modules/bootswatch/dist/cerulean/bootstrap.min.css";
 
 function Nav() {
-  const [selectedTheme, setSelectedTheme] = useState("Morph");
+  const [selectedTheme, setSelectedTheme] = useState("Cerulean");
 
   const themeColors = [
-    "Journal",
-    "Cyborg",
-    "Lux",
     "Cerulean",
     "Darkly",
     "Simplex",
+    "Solar",
     "Vapor",
+    "United",
+    "Superhero",
+    "Cyborg",
+    "Quartz",
+    "Pulse",
+    "Fire",
+    "Yeti",
+    "Flatly",
   ];
 
   const handleThemeChange = (theme: any) => {
@@ -44,14 +51,17 @@ function Nav() {
   ));
 
   return (
-    <nav className="navbar navbar-expand-md bg-primary bg-gradient">
-      <div className="container-fluid ustify-content-between navbar-left">
+    <nav
+      className="navbar navbar-expand-md bg-primary bg-gradient"
+      data-bs-theme="light"
+    >
+      <div className="container-fluid justify-content-between navbar-left">
         <Logo />
-        <div className=" flex-row mb-1 justify-content-md-end collapse navbar-collapse navbar-left">
+        <div className=" flex-row mb-1 justify-content-md-end collapse navbar-collapse navbar-right">
           <ul className="nav navbar-nav ">
             <li className=" nav-item ">
               <a
-                className="nav-link text-primary-emphasis active"
+                className="nav-link text-body-emphasis active"
                 aria-current="page"
                 href="#"
               >
@@ -59,13 +69,13 @@ function Nav() {
               </a>
             </li>
             <li className="nav-item ">
-              <a className="nav-link text-primary-emphasis" href="#">
+              <a className="nav-link text-body-emphasis" href="#">
                 About
               </a>
             </li>
             <li className="nav-item dropdown-center">
               <a
-                className="nav-link text-primary-emphasis dropdown-toggle"
+                className="nav-link text-body-emphasis dropdown-toggle"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -81,18 +91,18 @@ function Nav() {
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-primary-emphasis" href="#">
+              <a className="nav-link text-body-emphasis" href="#">
                 Contact
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-primary-emphasis" href="#">
+              <a className="nav-link text-body-emphasis" href="#">
                 {" "}
                 My Mini Projects
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-primary-emphasis" href="#">
+              <a className="nav-link text-body-emphasis" href="#">
                 Admin Page
               </a>
             </li>

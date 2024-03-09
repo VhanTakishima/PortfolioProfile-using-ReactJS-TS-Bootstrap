@@ -56,7 +56,7 @@ export default function Logo(): JSX.Element {
 
   return (
     <div>
-      <p className="randomLetters text-primary-emphasis">LOVE</p>
+      <p className="randomLetters text-secondary">LOVE</p>
     </div>
   );
 }
