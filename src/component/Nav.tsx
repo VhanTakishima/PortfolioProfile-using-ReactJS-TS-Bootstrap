@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styling/Nav.css";
 import Logo from "./Logo";
-import "../../node_modules/bootswatch/dist/cerulean/bootstrap.min.css";
+// import "../../node_modules/bootswatch/dist/cerulean/bootstrap.min.css";
 
 function Nav() {
-  const [selectedTheme, setSelectedTheme] = useState("Cerulean");
+  const storedTheme = localStorage.getItem("selectedTheme") || "Cerulean";
+  const [selectedTheme, setSelectedTheme] = useState(storedTheme);
 
   const themeColors = [
     "Cerulean",
@@ -37,10 +38,16 @@ function Nav() {
 
     // Append the new link element to the document head
     document.head.appendChild(newLink);
-    console.log(selectedTheme);
-    //naOOC ako sa yellow squiggly lines
+
+    // Update the selected theme state
     setSelectedTheme(theme);
+    console.log(selectedTheme);
+    // Save the selected theme to local storage
+    localStorage.setItem("selectedTheme", theme);
   };
+  useEffect(() => {
+    console.log("Stored theme:", storedTheme);
+  }, []);
 
   const themeHandler = themeColors.map((theme) => (
     <li key={theme} id={theme} onClick={() => handleThemeChange(theme)}>

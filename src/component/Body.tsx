@@ -3,6 +3,7 @@ import "../styling/Nav.css";
 import "../styling/Body.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
+import { useState, useEffect } from "react";
 
 function Body() {
   //used array destructuring in typedWords variable from text to [typedWords] and from {typedWords} to {[typedWords]}
@@ -13,6 +14,18 @@ function Body() {
     deleteSpeed: 50,
     delaySpeed: 1000,
   });
+
+  const [clock, setClock] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Update the clock state every second
+      setClock((prevClock) => prevClock + 1);
+    }, 1000);
+
+    // Clean up the interval to avoid memory leaks
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array to run effect only once
 
   return (
     <div className="container-fluid body-whole">
@@ -56,6 +69,7 @@ function Body() {
           in Linux (in short a script kiddie).{" "}
         </h6>
         <button className="btn btn-primary">Download My Resume</button>
+        <p className="clockTest">{clock} seconds on the page </p>
       </div>
     </div>
   );
