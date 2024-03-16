@@ -23,7 +23,7 @@ function Nav() {
     "Flatly",
   ];
 
-  const handleThemeChange = (theme: any) => {
+  const handleThemeChange = (theme: string) => {
     // Remove the previously loaded CSS file
     const oldLink = document.getElementById("theme-stylesheet");
     if (oldLink) {
@@ -98,7 +98,11 @@ function Nav() {
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-body-emphasis" href="#">
+              <a
+                className="nav-link text-body-emphasis"
+                href="#"
+                data-bs-target="#contact"
+              >
                 Contact
               </a>
             </li>
