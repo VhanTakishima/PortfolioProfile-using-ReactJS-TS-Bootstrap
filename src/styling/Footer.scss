@@ -27,3 +27,12 @@ margin-right: 5px;
     width: 20%;
     margin: 2px;
 }
+
+.box-anim{
+  animation: slideIn 1s !important;  
+}
+@keyframes slideIn {
+0%{transform: translateY(-100%);}
+50%{ transform: translateY(-50);}
+100%{transform: translateY(0);}    
+}

@@ -66,6 +66,7 @@ export function Footer() {
             </h4>
           </div>
           <div className="row">
+            {/* //footer first column */}
             <div className="col-12 justify-content-center">
               <button
                 type="button"
@@ -114,14 +115,16 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="col-4 justify-content-center">
+
+        {/* //footer second column */}
+        <div className="col-4 justify-content-center ">
           <div className="row">
             {" "}
             <p className="text-primary">.........</p>
           </div>
           <div className="row">
             {linkToggle[0] && (
-              <form className="d-flex ">
+              <form className="d-flex box-anim">
                 <input
                   className="tocopy form-control form-control-md"
                   type="text"
@@ -154,7 +157,7 @@ export function Footer() {
               </form>
             )}
             {linkToggle[1] && (
-              <form className="d-flex ">
+              <form className="d-flex box-anim">
                 <input
                   className="tocopy form-control form-control-md"
                   type="text"
@@ -187,7 +190,7 @@ export function Footer() {
               </form>
             )}
             {linkToggle[2] && (
-              <form className="d-flex ">
+              <form className="d-flex box-anim">
                 <input
                   className="tocopy form-control form-control-md"
                   type="text"
@@ -222,7 +225,7 @@ export function Footer() {
               </form>
             )}
             {linkToggle[3] && (
-              <form className="d-flex ">
+              <form className="d-flex box-anim">
                 <input
                   className="tocopy form-control form-control-md"
                   type="text"

@@ -100,7 +100,7 @@ function Nav() {
             <li className="nav-item">
               <a
                 className="nav-link text-body-emphasis"
-                href="#"
+                href="#contact"
                 data-bs-target="#contact"
               >
                 Contact
