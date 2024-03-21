@@ -1,13 +1,32 @@
 import { useState, useEffect } from "react";
 import "../styling/Nav.css";
 import Logo from "./Logo";
-// import "../../node_modules/bootswatch/dist/cerulean/bootstrap.min.css";
+
+// Define a type for the themee names- why? beacuse TYPESCRIPT! kingina
+type Theme =
+  | "Cerulean"
+  | "Darkly"
+  | "Simplex"
+  | "Solar"
+  | "Vapor"
+  | "United"
+  | "Superhero"
+  | "Cyborg"
+  | "Quartz"
+  | "Pulse"
+  | "Fire"
+  | "Yeti"
+  | "Flatly";
 
 function Nav() {
-  const storedTheme = localStorage.getItem("selectedTheme") || "Cerulean";
-  const [selectedTheme, setSelectedTheme] = useState(storedTheme);
+  // get the value on local storage or default to "Cerulean"
+  const storedTheme: Theme =
+    (localStorage.getItem("selectedTheme") as Theme) || "Cerulean";
 
-  const themeColors = [
+  // states
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(storedTheme);
+
+  const themeColors: Theme[] = [
     "Cerulean",
     "Darkly",
     "Simplex",
@@ -23,30 +42,31 @@ function Nav() {
     "Flatly",
   ];
 
-  const handleThemeChange = (theme: string) => {
-    // Remove the previously loaded CSS file
+  const handleThemeChange = (theme: Theme) => {
+    // reload CSS file para safe (remove)
     const oldLink = document.getElementById("theme-stylesheet");
     if (oldLink) {
       oldLink.remove();
     }
 
-    // Create a new link element to load the CSS file for the selected theme
+    // reload CSS file para safe (regenerate)
     const newLink = document.createElement("link");
     newLink.rel = "stylesheet";
     newLink.id = "theme-stylesheet";
     newLink.href = `../../node_modules/bootswatch/dist/${theme.toLowerCase()}/bootstrap.min.css`;
 
-    // Append the new link element to the document head
     document.head.appendChild(newLink);
 
     // Update the selected theme state
     setSelectedTheme(theme);
-    console.log(selectedTheme);
-    // Save the selected theme to local storage
+
+    // Save sa local storage
     localStorage.setItem("selectedTheme", theme);
   };
+
   useEffect(() => {
-    console.log("Stored theme:", storedTheme);
+    // onmount
+    handleThemeChange(storedTheme);
   }, []);
 
   const themeHandler = themeColors.map((theme) => (
@@ -123,5 +143,4 @@ function Nav() {
     </nav>
   );
 }
-
 export default Nav;

@@ -1,11 +1,9 @@
 import "../styling/Nav.css";
 
-import "../styling/Mmp.css";
 import Nav from "./Nav.tsx";
 import Body from "./Body.tsx";
 import Footer from "./Footer.tsx";
-import Mmp from "./Mmp.tsx";
-
+import Miniproject from "./Miniproject.tsx";
 // import Calculathor from "./Calculathor.tsx";
 
 function App() {
@@ -14,7 +12,7 @@ function App() {
     <div>
       <Nav />
       <Body />
-      <Mmp />
+      <Miniproject />
       {/* <Calculathor /> */}
       <Footer />
     </div>
