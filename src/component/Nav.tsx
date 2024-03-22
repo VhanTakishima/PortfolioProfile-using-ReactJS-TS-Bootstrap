@@ -67,6 +67,7 @@ function Nav() {
   useEffect(() => {
     // onmount
     handleThemeChange(storedTheme);
+    console.log(selectedTheme);
   }, []);
 
   const themeHandler = themeColors.map((theme) => (

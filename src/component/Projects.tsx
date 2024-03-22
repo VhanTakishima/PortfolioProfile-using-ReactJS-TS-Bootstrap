@@ -1,4 +1,5 @@
 import "../styling/Project.css";
+import { useState } from "react";
 
 type Project = {
   key: number;
@@ -11,10 +12,17 @@ type Project = {
 
 type ProjectsProps = {
   projects: Project[];
+  toggleCalculathorVisibility: () => void; // Add this line
 };
 
 let Projects;
-export default Projects = ({ projects }: ProjectsProps) => {
+
+export default Projects = ({
+  projects,
+  toggleCalculathorVisibility,
+}: ProjectsProps) => {
+  const [isCalculathorVisible, setIsCalculathorVisible] = useState(true);
+
   return (
     <div>
       {projects.map((project) => (
@@ -26,7 +34,12 @@ export default Projects = ({ projects }: ProjectsProps) => {
           <div className="carousel-caption d-none d-md-block cstm-bckgrnd">
             <h5 className="">{project.title}</h5>
             <p className="">{project.description}</p>
-            <a href={project.btnLink} className="btn btn-primary" role="button">
+            <a
+              href={project.btnLink}
+              className="btn btn-primary"
+              role="button"
+              onClick={toggleCalculathorVisibility}
+            >
               Check it out
             </a>
           </div>

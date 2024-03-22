@@ -1,25 +1,15 @@
 import Projects from "./Projects";
 import "../styling/Miniproject.css";
-function Miniproject() {
-  // const responsive = {
-  //   desktop: {
-  //     breakpoint: { max: 3000, min: 800 },
-  //     items: 3,
-  //     slidesToSlide: 1, // optional, default to 1.
-  //   },
-  //   tablet: {
-  //     breakpoint: { max: 800, min: 464 },
-  //     items: 2,
-  //     slidesToSlide: 2, // optional, default to 1.
-  //   },
-  //   mobile: {
-  //     breakpoint: { max: 464, min: 0 },
-  //     items: 1,
-  //     slidesToSlide: 1, // optional, default to 1.
-  //   },
-  // };
+import { useState } from "react";
+import Calculathor from "./Calculathor";
 
-  //add cards here -- might automate in the  future
+function Miniproject() {
+  const [isCalculathorVisible, setIsCalculathorVisible] = useState(false);
+
+  const toggleCalculathorVisibility = () => {
+    setIsCalculathorVisible(!isCalculathorVisible);
+  };
+
   const projectData = [
     {
       key: 0,
@@ -100,7 +90,16 @@ function Miniproject() {
           >
             <div className="carousel-indicators">{carouselIndicators}</div>
             <div className="carousel-inner">
-              <Projects projects={projectData} />
+              <Projects
+                projects={projectData}
+                toggleCalculathorVisibility={toggleCalculathorVisibility}
+              />
+              {isCalculathorVisible && (
+                <Calculathor
+                  isVisible={isCalculathorVisible}
+                  onClose={toggleCalculathorVisibility}
+                />
+              )}
             </div>
             <button
               className="carousel-control-prev"
@@ -134,4 +133,5 @@ function Miniproject() {
     </div>
   );
 }
+
 export default Miniproject;
