@@ -1,12 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+.logoContainer{
+display: flex;
+justify-content: center;
+align-items: start;
 
+}
 .randomLetters{
     font-family: Anta, sans-serif;
     font-size: 50px;
     font-weight:bolder;
-    margin-bottom: 0;
+    
 }
 
 .container-fluid{
@@ -20,3 +25,32 @@
 }
 .nav-item{
     font-size: 20px;}
+
+.navbar-toggler{ 
+    align-self: start;
+}
+
+
+    
+// r3esponsiveness
+    @media (max-width: 768px) {
+        .navbar-collapse {
+            padding-left: 1.7vw;
+            /* From https://css.glass */
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10.5px);
+            -webkit-backdrop-filter: blur(10.5px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .logoContainer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+    }
+
+
+ 

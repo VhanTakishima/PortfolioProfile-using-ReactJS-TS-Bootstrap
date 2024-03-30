@@ -4,6 +4,7 @@ import "../styling/Body.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { useState, useEffect } from "react";
+
 function Body() {
   //used array destructuring in typedWords variable from text to [typedWords] and from {typedWords} to {[typedWords]}
   let [typedWords] = useTypewriter({
@@ -35,7 +36,7 @@ function Body() {
   }, []); // Empty dependency array to run effect only once
 
   return (
-    <div className="container-fluid body-whole">
+    <div className="container-fluid responsiveness-div-body">
       <div className="leftColumn">
         <img
           src="../src/assets/Image2.png"
@@ -46,15 +47,17 @@ function Body() {
       <div className="rightColumn">
         <h1 className="text-body">
           {" "}
-          Hi my name is John
+          My name is <span className="text-primary">John</span>
           <br />
-          from The Philippines
+          from The <span className="text-primary">Philippines</span>
         </h1>
         <h2 className="text-body mb-3">
-          I'm a <span className="text-primary">{[typedWords]}</span>
-          <Cursor />
+          I'm a <br className="show-on-mobile" />
+          <span className="text-primary">
+            {[typedWords]} <Cursor />
+          </span>
         </h2>
-        <h6 className="text-body mb-4">
+        <h6 className="text-body mb-4 responsive-h6">
           {" "}
           I'm currently a Graphic specialist and aspiring to start my
           programming career. I've been studying and applying my knowledge in
@@ -75,6 +78,7 @@ function Body() {
           game files . I'm also experimenting and tweaking with existing scripts
           in Linux (in short a script kiddie).{" "}
         </h6>
+
         <a
           className="btn btn-primary"
           role="button"
@@ -87,6 +91,11 @@ function Body() {
           {minutes} minutes {seconds} seconds on the page{" "}
         </p>
       </div>
+      {/* to be added later */}
+      {/* <img
+          src="https://github-readme-stats.vercel.app/api/top-langs?username=vhantakishima&show_icons=true&locale=en&layout=compact&theme=chartreuse-dark"
+          alt="vhantakishima"
+        /> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-.calcdisplay {
+.tododisplay {
   width: 50%;
   margin: 20px;
   padding: 20px;
@@ -13,19 +13,4 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.2px);
   -webkit-backdrop-filter: blur(7.2px);
-}
-
-.calcbutt {
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.calctitle {
-  margin-left: 5px;
-}
-
-.inputMonitor {
-  width: 100%;
-  margin: 5px;
-}/*# sourceMappingURL=Calculathor.css.map */
+}/*# sourceMappingURL=ToDoList.css.map */

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "../styling/Nav.css";
 import Logo from "./Logo";
 
-// Define a type for the themee names- why? beacuse TYPESCRIPT! kingina
 type Theme =
   | "Cerulean"
   | "Darkly"
@@ -19,11 +18,9 @@ type Theme =
   | "Flatly";
 
 function Nav() {
-  // get the value on local storage or default to "Cerulean"
   const storedTheme: Theme =
     (localStorage.getItem("selectedTheme") as Theme) || "Cerulean";
 
-  // states
   const [selectedTheme, setSelectedTheme] = useState<Theme>(storedTheme);
 
   const themeColors: Theme[] = [
@@ -35,7 +32,6 @@ function Nav() {
     "United",
     "Superhero",
     "Cyborg",
-    "Quartz",
     "Pulse",
     "Fire",
     "Yeti",
@@ -43,13 +39,11 @@ function Nav() {
   ];
 
   const handleThemeChange = (theme: Theme) => {
-    // reload CSS file para safe (remove)
     const oldLink = document.getElementById("theme-stylesheet");
     if (oldLink) {
       oldLink.remove();
     }
 
-    // reload CSS file para safe (regenerate)
     const newLink = document.createElement("link");
     newLink.rel = "stylesheet";
     newLink.id = "theme-stylesheet";
@@ -57,84 +51,80 @@ function Nav() {
 
     document.head.appendChild(newLink);
 
-    // Update the selected theme state
     setSelectedTheme(theme);
-
-    // Save sa local storage
     localStorage.setItem("selectedTheme", theme);
   };
 
   useEffect(() => {
-    // onmount
     handleThemeChange(storedTheme);
     console.log(selectedTheme);
   }, []);
 
   const themeHandler = themeColors.map((theme) => (
-    <li key={theme} id={theme} onClick={() => handleThemeChange(theme)}>
-      <a className="dropdown-item" href="#">
-        {theme}
-      </a>
-    </li>
+    <a
+      key={theme}
+      className="dropdown-item"
+      href="#"
+      onClick={() => handleThemeChange(theme)}
+    >
+      {theme}
+    </a>
   ));
 
   return (
-    <nav
-      className="navbar navbar-expand-md bg-primary bg-gradient"
-      data-bs-theme="light"
-    >
-      <div className="container-fluid justify-content-between navbar-left">
+    <nav className="navbar navbar-expand-md navbar-dark bg-primary">
+      <div className="container">
         <Logo />
-        <div className=" flex-row mb-1 justify-content-md-end collapse navbar-collapse navbar-right">
-          <ul className="nav navbar-nav ">
-            <li className=" nav-item ">
-              <a
-                className="nav-link text-body-emphasis active"
-                aria-current="page"
-                href="#"
-              >
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <a className="nav-link active" href="#">
                 Home
               </a>
             </li>
-            <li className="nav-item ">
-              <a className="nav-link text-body-emphasis" href="#">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 About
               </a>
             </li>
-            <li className="nav-item dropdown-center">
+            <li className="nav-item dropdown">
               <a
-                className="nav-link text-body-emphasis dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
+                id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Themes
               </a>
-              <ul
-                className="dropdown-menu dropdown-menu-dark bg-black bg-gradient link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                aria-labelledby="navbarDarkDropdownMenuLink"
-              >
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {themeHandler}
               </ul>
             </li>
             <li className="nav-item">
-              <a
-                className="nav-link text-body-emphasis"
-                href="#contact"
-                data-bs-target="#contact"
-              >
+              <a className="nav-link" href="#contact">
                 Contact
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-body-emphasis" href="#">
-                {" "}
+              <a className="nav-link" href="#">
                 My Mini Projects
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-body-emphasis" href="#">
+              <a className="nav-link" href="#">
                 Admin Page
               </a>
             </li>
@@ -144,4 +134,5 @@ function Nav() {
     </nav>
   );
 }
+
 export default Nav;

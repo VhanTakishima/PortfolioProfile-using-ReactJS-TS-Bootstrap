@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-.body-whole {
+.responsiveness-div-body {
     margin-top: 40px !important;
     padding-bottom: 50px;
     display: grid;
@@ -36,10 +36,45 @@ border-radius: 75px;
 margin-left: 20px;
 }
 .rightColumn{
-    margin-left: 100px;
+margin-left: 100px;
 }
 
 .btn{
     border:none;
     outline:none;
+}
+.show-on-mobile{display: none;}
+
+// responsiveness
+
+@media (max-width: 768px) {
+.responsiveness-div-body{
+    display:flex;
+    flex-direction:column;
+    margin:0px !important;
+    padding: 0px;
+    align-items: center;
+    grid-template-columns: auto;
+}
+    //this is now top on mobile view
+.leftColumn{
+    margin-top:40px;
+    margin-left: 0px;
+    }
+
+
+    //this is now bottom on mobile view
+    .rightColumn{
+        margin-left: 0px;
+        text-align: center;
+        h6{
+            margin-top:2vh;
+            text-align: justify;
+        }
+    }
+
+    .img-fluid{
+        height: 30vh !important;
+    }
+    .show-on-mobile{display: inline;}
 }

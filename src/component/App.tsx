@@ -5,12 +5,18 @@ import Body from "./Body.tsx";
 import Footer from "./Footer.tsx";
 import Miniproject from "./Miniproject.tsx";
 import Calculathor from "./Calculathor.tsx";
+import ToDoList from "./ToDoList.tsx";
 
 function App() {
   const [isCalculathorVisible, setIsCalculathorVisible] = useState(false);
+  const [isToDoListVisible, setToDoListVisible] = useState(false);
 
   const toggleCalculathorVisibility = () => {
     setIsCalculathorVisible(!isCalculathorVisible);
+  };
+
+  const toggleToDoListVisibility = () => {
+    setToDoListVisible(!isToDoListVisible);
   };
 
   return (
@@ -19,12 +25,19 @@ function App() {
       <Nav />
       <Body />
       <Miniproject />
-      {isCalculathorVisible && (
+      {/* {isCalculathorVisible && (
         <Calculathor
           isVisible={isCalculathorVisible}
           onClose={toggleCalculathorVisibility}
         />
       )}
+      {isToDoListVisible && (
+        <ToDoList
+          isVisible={isToDoListVisible}
+          onClose={toggleToDoListVisibility}
+        />
+      )} */}
+
       <Footer />
     </div>
   );

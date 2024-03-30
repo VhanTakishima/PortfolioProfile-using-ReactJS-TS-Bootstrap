@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
-.body-whole {
+.responsiveness-div-body {
   margin-top: 40px !important;
   padding-bottom: 50px;
   display: grid;
@@ -42,4 +42,37 @@ h6 {
 .btn {
   border: none;
   outline: none;
+}
+
+.show-on-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .responsiveness-div-body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px !important;
+    padding: 0px;
+    align-items: center;
+    grid-template-columns: auto;
+  }
+  .leftColumn {
+    margin-top: 40px;
+    margin-left: 0px;
+  }
+  .rightColumn {
+    margin-left: 0px;
+    text-align: center;
+  }
+  .rightColumn h6 {
+    margin-top: 2vh;
+    text-align: justify;
+  }
+  .img-fluid {
+    height: 30vh !important;
+  }
+  .show-on-mobile {
+    display: inline;
+  }
 }/*# sourceMappingURL=Body.css.map */

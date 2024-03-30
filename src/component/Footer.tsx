@@ -58,208 +58,195 @@ export function Footer() {
   return (
     <footer className="page-footer bg-primary text-body-emphasis ">
       <div className="container-fluid text-center mx-1 my-1 py-3"></div>
-      <div className="row ml-1 align-items-start">
-        <div className="col-5 mx-4">
-          <div className="row">
-            <h4 className="text-body-emphasis" id="contact">
-              Contact with the following links
-            </h4>
-          </div>
-          <div className="row">
-            {/* //footer first column */}
-            <div className="col-12 justify-content-center">
-              <button
-                type="button"
-                id="button-fb"
-                className="btn btn-secondary contactbutton"
-                onClick={() => {
-                  linkToggleHandler(0);
-                  btndisabler();
-                }}
-              >
-                <i className="bi bi-facebook" />
-              </button>
-              <button
-                type="button"
-                id="button-github"
-                className="btn btn-secondary contactbutton"
-                onClick={() => {
-                  linkToggleHandler(1);
-                  btndisabler();
-                }}
-              >
-                <i className="bi bi-github"></i>
-              </button>
-              <button
-                type="button"
-                id="button-linkedin"
-                className="btn btn-secondary contactbutton"
-                onClick={() => {
-                  linkToggleHandler(2);
-                  btndisabler();
-                }}
-              >
-                <i className="bi bi-linkedin"></i>
-              </button>
-              <button
-                type="button"
-                id="button-email"
-                className="btn btn-secondary contactbutton"
-                onClick={() => {
-                  linkToggleHandler(3);
-                  btndisabler();
-                }}
-              >
-                <i className="bi bi-envelope-open-fill"></i>
-              </button>
-            </div>
-          </div>
+      <h4 className="text-body-emphasis mx-4" id="contact">
+        Contact with the following links
+      </h4>
+      <div className="row ml-1">
+        {/* with margin 4 on left */}
+        <div className="col-1 g-2 ms-4 align-self-center">
+          {/* //footer first column */}
+          <button
+            type="button"
+            id="button-fb"
+            className="btn btn-secondary contactbutton"
+            onClick={() => {
+              linkToggleHandler(0);
+              btndisabler();
+            }}
+          >
+            <i className="bi bi-facebook" />
+          </button>
+        </div>
+        <div className="col-1 g-2 align-self-center">
+          <button
+            type="button"
+            id="button-github"
+            className="btn btn-secondary contactbutton"
+            onClick={() => {
+              linkToggleHandler(1);
+              btndisabler();
+            }}
+          >
+            <i className="bi bi-github"></i>
+          </button>
+        </div>
+        <div className="col-1 g-2 align-self-center">
+          <button
+            type="button"
+            id="button-linkedin"
+            className="btn btn-secondary contactbutton"
+            onClick={() => {
+              linkToggleHandler(2);
+              btndisabler();
+            }}
+          >
+            <i className="bi bi-linkedin"></i>
+          </button>
+        </div>
+        <div className="col-1 g-2 align-self-center">
+          <button
+            type="button"
+            id="button-email"
+            className="btn btn-secondary contactbutton"
+            onClick={() => {
+              linkToggleHandler(3);
+              btndisabler();
+            }}
+          >
+            <i className="bi bi-envelope-open-fill"></i>
+          </button>
         </div>
 
         {/* //footer second column */}
-        <div className="col-4 justify-content-center ">
-          <div className="row">
-            {" "}
-            <p className="text-primary">.........</p>
-          </div>
-          <div className="row">
-            {linkToggle[0] && (
-              <form className="d-flex box-anim">
-                <input
-                  className="tocopy form-control form-control-md"
-                  type="text"
-                  value="www.facebook.com/VhanTakishima"
-                  readOnly
-                />
-                <button
-                  className=" btn btn-secondary tocopybuttton bi bi-clipboard"
-                  onClick={(event) => {
-                    const form = event.currentTarget.closest("form");
-                    const input =
-                      form?.querySelector<HTMLInputElement>(
-                        'input[type="text"]'
-                      );
-                    if (input) {
-                      copyToClipboard(input.value);
-                      alert(`Copied to clipboard.`);
-                      linkToggleHandler(0);
-                      btnenabler();
-                    }
-                  }}
-                ></button>
-                <button
-                  className=" btn btn-secondary close tocopybuttton bi bi-x-circle-fill"
-                  onClick={() => {
+        <div className="col-5 g-2 ms-2 align-self-center">
+          {linkToggle[0] && (
+            <form className="d-flex box-anim">
+              <input
+                className="tocopy form-control form-control-md"
+                type="text"
+                value="www.facebook.com/VhanTakishima"
+                readOnly
+              />
+              <button
+                className=" btn btn-secondary tocopybuttton bi bi-clipboard"
+                onClick={(event) => {
+                  const form = event.currentTarget.closest("form");
+                  const input =
+                    form?.querySelector<HTMLInputElement>('input[type="text"]');
+                  if (input) {
+                    copyToClipboard(input.value);
+                    alert(`Copied to clipboard.`);
                     linkToggleHandler(0);
                     btnenabler();
-                  }}
-                ></button>
-              </form>
-            )}
-            {linkToggle[1] && (
-              <form className="d-flex box-anim">
-                <input
-                  className="tocopy form-control form-control-md"
-                  type="text"
-                  value="https://github.com/VhanTakishima"
-                  readOnly
-                />
-                <button
-                  className=" btn btn-secondary tocopybuttton bi bi-clipboard"
-                  onClick={(event) => {
-                    const form = event.currentTarget.closest("form");
-                    const input =
-                      form?.querySelector<HTMLInputElement>(
-                        'input[type="text"]'
-                      );
-                    if (input) {
-                      copyToClipboard(input.value);
-                      alert(`Copied to clipboard.`);
-                      linkToggleHandler(1);
-                      btnenabler();
-                    }
-                  }}
-                ></button>
-                <button
-                  className=" btn btn-secondary close tocopybuttton bi bi-x-circle-fill"
-                  onClick={() => {
+                  }
+                }}
+              ></button>
+              <button
+                className=" btn btn-secondary close tocopybuttton bi bi-x-circle-fill"
+                onClick={() => {
+                  linkToggleHandler(0);
+                  btnenabler();
+                }}
+              ></button>
+            </form>
+          )}
+          {linkToggle[1] && (
+            <form className="d-flex box-anim">
+              <input
+                className="tocopy form-control form-control-md"
+                type="text"
+                value="https://github.com/VhanTakishima"
+                readOnly
+              />
+              <button
+                className=" btn btn-secondary tocopybuttton bi bi-clipboard"
+                onClick={(event) => {
+                  const form = event.currentTarget.closest("form");
+                  const input =
+                    form?.querySelector<HTMLInputElement>('input[type="text"]');
+                  if (input) {
+                    copyToClipboard(input.value);
+                    alert(`Copied to clipboard.`);
                     linkToggleHandler(1);
                     btnenabler();
-                  }}
-                ></button>
-              </form>
-            )}
-            {linkToggle[2] && (
-              <form className="d-flex box-anim">
-                <input
-                  className="tocopy form-control form-control-md"
-                  type="text"
-                  value="www.linkedin.com/in/vhantakishima"
-                  readOnly
-                />
-                <button
-                  className=" btn btn-secondary tocopybuttton bi bi-clipboard"
-                  onClick={(event) => {
-                    const form = event.currentTarget.closest("form");
-                    const input =
-                      form?.querySelector<HTMLInputElement>(
-                        'input[type="text"]'
-                      );
-                    if (input) {
-                      copyToClipboard(input.value);
-                      alert(`Copied to clipboard.`);
-                      linkToggleHandler(2);
-                      btnenabler();
-                    }
-                  }}
-                ></button>
-                <button
-                  className=" btn btn-secondary close tocopybuttton bi bi-x-circle-fill"
-                  onClick={() => {
+                  }
+                }}
+              ></button>
+              <button
+                className=" btn btn-secondary close tocopybuttton bi bi-x-circle-fill"
+                onClick={() => {
+                  linkToggleHandler(1);
+                  btnenabler();
+                }}
+              ></button>
+            </form>
+          )}
+          {linkToggle[2] && (
+            <form className="d-flex box-anim">
+              <input
+                className="tocopy form-control form-control-md"
+                type="text"
+                value="www.linkedin.com/in/vhantakishima"
+                readOnly
+              />
+              <button
+                className=" btn btn-secondary tocopybuttton bi bi-clipboard"
+                onClick={(event) => {
+                  const form = event.currentTarget.closest("form");
+                  const input =
+                    form?.querySelector<HTMLInputElement>('input[type="text"]');
+                  if (input) {
+                    copyToClipboard(input.value);
+                    alert(`Copied to clipboard.`);
                     linkToggleHandler(2);
                     btnenabler();
-                  }}
-                >
-                  {/* <i className="bi bi-x-circle-fill"></i> */}
-                </button>
-              </form>
-            )}
-            {linkToggle[3] && (
-              <form className="d-flex box-anim">
-                <input
-                  className="tocopy form-control form-control-md"
-                  type="text"
-                  value="vhantakishima@gmail.com"
-                  readOnly
-                />
-                <button
-                  className=" btn btn-secondary tocopybuttton bi bi-clipboard"
-                  onClick={(event) => {
-                    const form = event.currentTarget.closest("form");
-                    const input =
-                      form?.querySelector<HTMLInputElement>(
-                        'input[type="text"]'
-                      );
-                    if (input) {
-                      copyToClipboard(input.value);
-                      alert(`Copied to clipboard.`);
-                      linkToggleHandler(3);
-                      btnenabler();
-                    }
-                  }}
-                ></button>
-                <button
-                  className=" btn btn-secondary close tocopybuttton  bi bi-x-circle-fill"
-                  onClick={() => {
+                  }
+                }}
+              ></button>
+              <button
+                className=" btn btn-secondary close tocopybuttton bi bi-x-circle-fill"
+                onClick={() => {
+                  linkToggleHandler(2);
+                  btnenabler();
+                }}
+              >
+                {/* <i className="bi bi-x-circle-fill"></i> */}
+              </button>
+            </form>
+          )}
+          {linkToggle[3] && (
+            <form className="d-flex box-anim">
+              <input
+                className="tocopy form-control form-control-md"
+                type="text"
+                value="vhantakishima@gmail.com"
+                readOnly
+              />
+              <button
+                className=" btn btn-secondary tocopybuttton bi bi-clipboard"
+                onClick={(event) => {
+                  const form = event.currentTarget.closest("form");
+                  const input =
+                    form?.querySelector<HTMLInputElement>('input[type="text"]');
+                  if (input) {
+                    copyToClipboard(input.value);
+                    alert(`Copied to clipboard.`);
                     linkToggleHandler(3);
                     btnenabler();
-                  }}
-                ></button>
-              </form>
-            )}
-          </div>
+                  }
+                }}
+              ></button>
+              <button
+                className=" btn btn-secondary close tocopybuttton  bi bi-x-circle-fill"
+                onClick={() => {
+                  linkToggleHandler(3);
+                  btnenabler();
+                }}
+              ></button>
+            </form>
+          )}
         </div>
-        <div className="col"></div>
+        <div className="col-2"></div>
       </div>
       <div className="footer-copyright text-center text-body-emphasis py-3">
         © VhanTakishima 2024{" "}

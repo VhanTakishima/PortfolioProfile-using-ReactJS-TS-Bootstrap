@@ -1,14 +1,22 @@
-import Projects from "./Projects";
 import "../styling/Miniproject.css";
-import { useState } from "react";
 import Calculathor from "./Calculathor";
+import ToDoList from "./ToDoList";
+import { useState } from "react";
+
+type Project = {
+  key: number;
+  id: number;
+  title: string;
+  imgurl: string;
+  description: string;
+  btnLink: string;
+};
 
 function Miniproject() {
   const [isCalculathorVisible, setIsCalculathorVisible] = useState(false);
-
-  const toggleCalculathorVisibility = () => {
-    setIsCalculathorVisible(!isCalculathorVisible);
-  };
+  const [isToDoListVisible, setToDoListVisible] = useState(false);
+  // const [visibleComponent, setVisibleComponent] =
+  //   useState<React.ReactNode | null>(null);
 
   const projectData = [
     {
@@ -60,6 +68,28 @@ function Miniproject() {
       btnLink: "#",
     },
   ];
+  const toggleCalculathorVisibility = () => {
+    setIsCalculathorVisible(!isCalculathorVisible);
+    setToDoListVisible(false); // Close ToDoList when opening Calculathor
+  };
+
+  const toggleToDoListVisibility = () => {
+    setToDoListVisible(!isToDoListVisible);
+    setIsCalculathorVisible(false); // Close Calculathor when opening ToDoList
+  };
+
+  const handleButtonClick = (project: Project) => {
+    switch (project.title) {
+      case "Calculathor":
+        toggleCalculathorVisibility();
+        break;
+      case "To-do List":
+        toggleToDoListVisibility();
+        break;
+      default:
+        break;
+    }
+  };
 
   const carouselIndicators = projectData.map((project) => (
     <button
@@ -76,13 +106,13 @@ function Miniproject() {
     <div className="container-fluid">
       <div className="row gx-2 ">
         <div className="col-md-5 align-self-center">
-          <div className="row leftColumn text-end">
+          <div className="row leftColumn">
             <h1>My Mini Projects</h1>
             <h5>Currently WIP</h5>
           </div>
         </div>
         <div className="col-md-1"></div>
-        <div className="col-md-6">
+        <div className="col-md-6 carousel-area">
           <div
             className="carousel slide"
             id="projectsCarousel"
@@ -90,16 +120,35 @@ function Miniproject() {
           >
             <div className="carousel-indicators">{carouselIndicators}</div>
             <div className="carousel-inner">
-              <Projects
-                projects={projectData}
-                toggleCalculathorVisibility={toggleCalculathorVisibility}
-              />
-              {isCalculathorVisible && (
-                <Calculathor
-                  isVisible={isCalculathorVisible}
-                  onClose={toggleCalculathorVisibility}
-                />
-              )}
+              {projectData.map((project) => (
+                <div
+                  key={project.key}
+                  className={`carousel-item ${
+                    project.key === 0 ? " active" : ""
+                  }`}
+                >
+                  <img
+                    src={project.imgurl}
+                    className="d-block img-fluid"
+                    alt="..."
+                  />
+                  <div className="carousel-caption d-block cstm-bckgrnd">
+                    <h5 className="">{project.title}</h5>
+                    <p className="">{project.description}</p>
+                    <a
+                      href={project.btnLink}
+                      className="btn btn-primary"
+                      role="button"
+                      onClick={() => {
+                        handleButtonClick(project);
+                        console.log(project.title);
+                      }}
+                    >
+                      Check it out
+                    </a>
+                  </div>
+                </div>
+              ))}
             </div>
             <button
               className="carousel-control-prev"
@@ -127,7 +176,18 @@ function Miniproject() {
             </button>
           </div>
         </div>
-        {/* <div className="col-2"></div> */}
+        {isCalculathorVisible && (
+          <Calculathor
+            isVisible={isCalculathorVisible}
+            onClose={toggleCalculathorVisibility}
+          />
+        )}
+        {isToDoListVisible && (
+          <ToDoList
+            isVisible={isToDoListVisible}
+            onClose={toggleToDoListVisibility}
+          />
+        )}
       </div>
       {/* carousel ends here */}
     </div>

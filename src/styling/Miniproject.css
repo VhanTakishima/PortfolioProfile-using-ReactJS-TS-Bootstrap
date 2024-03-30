@@ -18,4 +18,49 @@
   margin-left: 20px !important;
   max-height: 100%;
   line-height: 100%;
+  text-align: right;
+}
+
+.card-text {
+  height: 3em !important;
+}
+
+.caption-opacity {
+  background-color: black;
+  opacity: 50%;
+}
+
+.cstm-bckgrnd {
+  border-radius: 20%;
+  background: rgb(0, 0, 0);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 15%, rgba(0, 0, 0, 0.75) 85%, rgba(0, 0, 0, 0) 100%);
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    display: flex;
+    flex-direction: column;
+    margin: 0px !important;
+    padding: 0px;
+    align-items: center;
+  }
+  .leftColumn {
+    margin-left: 0px !important;
+  }
+  .leftColumn h1 {
+    text-align: center;
+  }
+  .leftColumn h5 {
+    text-align: center;
+  }
+  .rightColumn {
+    margin-left: 0px;
+    text-align: center;
+  }
+  .carousel-area {
+    height: auto;
+  }
+  .carousel-area img {
+    height: auto !important;
+  }
 }/*# sourceMappingURL=Miniproject.css.map */

@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../styling/Nav.css";
+
 const CorrectWord: string[] = ["JOHN", "VHAN", "JPVC", "LIVE", "LOVE", "CODE"];
 const letters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -22,7 +23,6 @@ function startAnimation(): void {
     targetElements.forEach((targetElement) => {
       targetElement.textContent = Array.from(targetElement.textContent || "")
         .map((_letter: string, index: number) => {
-          // Use underscore to indicate unused variable
           if (index < iteration) {
             return currentWord[index];
           }
@@ -35,7 +35,7 @@ function startAnimation(): void {
       clearInterval(animationInterval);
       setTimeout(() => {
         clearWordAndProceed();
-      }, 1000); // Freeze for 1 second
+      }, 1000);
     }
 
     iteration += 1;
@@ -49,14 +49,48 @@ function clearWordAndProceed(): void {
 }
 
 export default function Logo(): JSX.Element {
+  const [fontSize, setFontSize] = useState<number>(0);
+  const [navbarHeight, setNavbarHeight] = useState<number>(0);
+
   useEffect(() => {
+    const updateFontSize = () => {
+      const screenHeight = window.innerHeight;
+      const navbarElement = document.querySelector(".navbar");
+      if (navbarElement) {
+        const navbarRect = navbarElement.getBoundingClientRect();
+        const navbarHeight = navbarRect.height;
+        // Set font size based on a percentage of navbar height
+        setFontSize(navbarHeight * 0.9); // Adjust this value as needed
+        setNavbarHeight(navbarHeight);
+        console.log(screenHeight);
+      }
+    };
+
+    updateFontSize(); // Initial font size update
+
+    window.addEventListener("resize", updateFontSize); // Update font size on window resize
+
     startAnimation();
-    return () => clearInterval(animationInterval); // Cleanup interval on unmount
+
+    return () => {
+      clearInterval(animationInterval); // Cleanup interval on unmount
+      window.removeEventListener("resize", updateFontSize); // Cleanup event listener on unmount
+    };
   }, []); // Empty dependency array to run only once on mount
 
   return (
-    <div>
-      <p className="randomLetters text-secondary">LOVE</p>
+    <div className="logoContainer"
+      style={{
+        height: `${navbarHeight}px`,
+        lineHeight: `${navbarHeight}px`,
+      }}
+    >
+      <p
+        className="randomLetters text-secondary"
+        style={{ fontSize: `${fontSize}px` }}
+      >
+        LOVE
+      </p>
     </div>
   );
 }
