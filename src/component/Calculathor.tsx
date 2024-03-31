@@ -45,17 +45,17 @@ function Calculathor({ isVisible, onClose }: CalculathorProps) {
       <div className="calcdisplay ">
         {/* closing row */}
         <div className="row g-3 ">
-          <div className="col-11 align-self-center">
+          <div className="col-10 align-self-center">
             <h3 className="calctitle">
               <i className="bi bi-calculator"></i> Calculathor
             </h3>
           </div>
-          <div className="col-1">
+          <div className="col-2">
             <button
               type="button"
               value="Close"
               onClick={onClose}
-              className="calcbutt btn btn-primary"
+              className="calcclose btn btn-primary"
             >
               X
             </button>
