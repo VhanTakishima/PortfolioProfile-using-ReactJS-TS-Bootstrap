@@ -42,4 +42,12 @@ h4 {
   100% {
     transform: translateY(0);
   }
+}
+@media (max-width: 768px) {
+  .contactbutton {
+    padding: 0px !important;
+    margin: 5px !important;
+    align-items: center;
+    height: 8vh;
+  }
 }/*# sourceMappingURL=Footer.css.map */

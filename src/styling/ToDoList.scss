@@ -1,11 +1,11 @@
 .tododisplay{
-    width: 50%;
+    width: 80%;
     margin:20px;
     padding: 20px;
     padding-left: 12px;
     position: fixed !important ;
-    left:25vw;
-    top: 25vh;
+    left:10vw;
+    top: 10vh;
     z-index: 10;
    /* From https://css.glass */
 background: rgba(0, 0, 0, 0.56);
@@ -15,3 +15,22 @@ backdrop-filter: blur(7.2px);
 -webkit-backdrop-filter: blur(7.2px);
 }
 
+.todotitle{
+    margin:0px;
+    align-items: center;
+    height: auto;
+    font-size:5vh;
+    i{
+        margin-right:1vw;
+    }
+}
+.todoclose{
+    width:100%;
+}
+.todoclose{ 
+    width: 100%;
+    justify-content: end
+}
+.taskEntry{
+    width: 100%;
+}

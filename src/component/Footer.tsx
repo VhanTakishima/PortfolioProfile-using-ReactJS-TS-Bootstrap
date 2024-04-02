@@ -87,7 +87,7 @@ export function Footer() {
               btndisabler();
             }}
           >
-            <i className="bi bi-github"></i>
+            <i className="bi bi-github "></i>
           </button>
         </div>
         <div className="col-1 g-2 align-self-center">
@@ -100,7 +100,7 @@ export function Footer() {
               btndisabler();
             }}
           >
-            <i className="bi bi-linkedin"></i>
+            <i className="bi bi-linkedin icn-footer"></i>
           </button>
         </div>
         <div className="col-1 g-2 align-self-center">
