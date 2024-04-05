@@ -1,5 +1,5 @@
 import "../styling/ToDoList.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 type Task = {
   id: number;
