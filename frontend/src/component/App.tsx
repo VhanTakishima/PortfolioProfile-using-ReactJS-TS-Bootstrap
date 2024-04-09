@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import "../styling/Nav.css";
 import { useState } from "react";
 import Nav from "./Nav.tsx";

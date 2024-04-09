@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { RequestHandler } from "express";
 import Notemodel from "../models/note";
 import createHttpError from "http-errors";

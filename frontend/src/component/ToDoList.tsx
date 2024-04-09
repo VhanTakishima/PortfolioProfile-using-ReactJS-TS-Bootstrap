@@ -1,8 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 import "../styling/ToDoList.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Note } from "../models/note";
+import { response } from "express";
 
 type Task = {
   id: number;
+  title: string;
   description: string;
 };
 
@@ -12,14 +18,38 @@ type ToDoListProps = {
 };
 
 function ToDoList({ isVisible, onClose }: ToDoListProps) {
+  const [taskTitle, setTaskTitle] = useState<string>("");
   const [taskEntry, setTaskEntry] = useState<string>("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskIdCounter, setTaskIdCounter] = useState<number>(1);
   const [editTaskId, setEditTaskId] = useState<number | null>(null);
+  const [editTaskTitle, setEditTaskTitle] = useState<string>("");
   const [editTaskDescription, setEditTaskDescription] = useState<string>("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [notes, setNotes] = useState<Note[]>([]);
 
-  //new way to get event.target.value to useState
-  // evrytime I type it set taskll entry to taskEntry
+  useEffect(() => {
+    async function loadNotes() {
+      try {
+        const response = await fetch("/api/notes", {
+          method: "GET",
+        });
+        const notes = await response.json();
+        setNotes(notes);
+      } catch (error) {
+        console.error(error);
+        alert(error);
+      }
+    }
+    loadNotes();
+  }, []);
+
+  const handleTaskTitleChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setTaskTitle(event.target.value);
+  };
+
   const handleTaskEntryChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -27,14 +57,16 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
   };
 
   const addTask = () => {
-    if (taskEntry.trim() !== "") {
+    if (taskTitle.trim() !== "" && taskEntry.trim() !== "") {
       setTasks([
         ...tasks,
         {
           id: taskIdCounter,
+          title: taskTitle,
           description: taskEntry,
         },
       ]);
+      setTaskTitle("");
       setTaskEntry("");
       setTaskIdCounter(taskIdCounter + 1);
     }
@@ -44,12 +76,17 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
-  const handleTaskUpdate = (taskId: number, newDescription: string) => {
+  const handleTaskUpdate = (
+    taskId: number,
+    newTitle: string,
+    newDescription: string
+  ) => {
     setTasks(
       tasks.map((task) => {
         if (task.id === taskId) {
           return {
             ...task,
+            title: newTitle,
             description: newDescription,
           };
         }
@@ -57,6 +94,7 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
       })
     );
     setEditTaskId(null);
+    setEditTaskTitle("");
     setEditTaskDescription("");
   };
 
@@ -81,16 +119,24 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
           </div>
         </div>
         <div className="row g-3 mt-1">
-          <div className="col-8 h-100">
+          <div className="col-4 h-100">
+            <input
+              type="text"
+              className="taskTitle"
+              value={taskTitle}
+              placeholder="Enter Task Title"
+              onChange={handleTaskTitleChange}
+            />
+          </div>
+          <div className="col-5 h-100">
             <input
               type="text"
               className="taskEntry"
               value={taskEntry}
-              placeholder="Start adding tasks"
+              placeholder="Enter Task Entry"
               onChange={handleTaskEntryChange}
             />
           </div>
-          <div className="col-1"></div>
           <div className="col-3">
             <button
               type="button"
@@ -109,15 +155,26 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
               <thead>
                 <tr>
                   <th className="col-1">TaskID</th>
-                  <th className="col-8"> Task </th>
-                  <th className="col-3"> CRUD</th>
+                  <th className="col-4">Task Title</th>
+                  <th className="col-4">Task Description</th>
+                  <th className="col-3">CRUD</th>
                 </tr>
               </thead>
-
               <tbody>
                 {tasks.map((task) => (
                   <tr key={task.id}>
                     <td>{task.id}</td>
+                    <td>
+                      {editTaskId === task.id ? (
+                        <input
+                          type="text"
+                          value={editTaskTitle}
+                          onChange={(e) => setEditTaskTitle(e.target.value)}
+                        />
+                      ) : (
+                        task.title
+                      )}
+                    </td>
                     <td>
                       {editTaskId === task.id ? (
                         <input
@@ -136,7 +193,11 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
                         <button
                           type="button"
                           onClick={() =>
-                            handleTaskUpdate(task.id, editTaskDescription)
+                            handleTaskUpdate(
+                              task.id,
+                              editTaskTitle,
+                              editTaskDescription
+                            )
                           }
                           className="btn btn-success"
                         >
@@ -147,6 +208,7 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
                           type="button"
                           onClick={() => {
                             setEditTaskId(task.id);
+                            setEditTaskTitle(task.title);
                             setEditTaskDescription(task.description);
                           }}
                           className="btn btn-warning"
@@ -166,6 +228,7 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
                 ))}
               </tbody>
             </table>
+            <div>{JSON.stringify(notes)}</div>
           </div>
         </div>
       </div>
