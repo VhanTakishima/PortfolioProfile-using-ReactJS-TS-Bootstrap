@@ -7,6 +7,8 @@ import createHttpError, { isHttpError } from "http-errors";
 import cors from "cors"; // Import CORS middleware
 
 const app = express();
+// Parse JSON request bodies
+app.use(express.json());
 
 // Add CORS middleware
 app.use(
@@ -16,9 +18,6 @@ app.use(
 );
 
 app.use(morgan("dev"));
-
-// Parse JSON request bodies
-app.use(express.json());
 
 app.use("/api/notes", noteRoutes);
 

@@ -1,5 +1,6 @@
 .tododisplay{
     width: 80%;
+    height:80vh;
     margin:20px;
     padding: 20px;
     padding-left: 12px;
@@ -36,4 +37,11 @@ backdrop-filter: blur(7.2px);
 }
 .taskTitle{
     width: 100%;
+}
+.table-div {
+    height: 55vh;
+    overflow-y: scroll;
+}
+.table-width{
+    overflow-x: hidden;
 }

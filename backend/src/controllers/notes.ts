@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { RequestHandler } from "express";
+// import sanitizeHtml from "sanitize-html";
 import Notemodel from "../models/note";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
@@ -7,8 +8,12 @@ import note from "../models/note";
 
 export const getNotes: RequestHandler = async (req, res, next) => {
   try {
-    // throw Error("Error");
     const notes = await Notemodel.find().exec();
+    // const sanitizedNotes = notes.map((note) => ({
+    //   ...note.toObject(),
+    //   text: sanitizeHtml(note.text || ""), // Sanitize the 'text' property
+    // }));'
+    res.setHeader("Content-Type", "application/json");
     res.status(200).json(notes);
   } catch (error) {
     next(error);
@@ -22,13 +27,12 @@ export const getNote: RequestHandler = async (req, res, next) => {
     if (!mongoose.isValidObjectId(noteId)) {
       throw createHttpError(400, "Invalid note ID");
     }
-
     const note = await Notemodel.findById(noteId).exec();
 
     if (!note) {
       throw createHttpError(404, "Note not found");
     }
-
+    res.setHeader("Content-Type", "application/json");
     res.status(200).json(note);
   } catch (error) {
     next(error);
@@ -56,7 +60,7 @@ export const createNote: RequestHandler<
       title: title,
       text: text,
     });
-
+    res.setHeader("Content-Type", "application/json");
     res.status(201).json(newNote);
   } catch (error) {
     next(error);
@@ -97,7 +101,7 @@ export const updateNote: RequestHandler<
     note.title = newTitle;
     note.text = newText;
     const updatedNote = await note.save();
-
+    res.setHeader("Content-Type", "application/json");
     res.status(200).json(updatedNote);
   } catch (error) {
     next(error);
@@ -117,6 +121,7 @@ export const deleteNote: RequestHandler = async (req, res, next) => {
     }
 
     await note.deleteOne();
+    res.setHeader("Content-Type", "application/json");
     res.sendStatus(204);
   } catch (error) {
     next(error);

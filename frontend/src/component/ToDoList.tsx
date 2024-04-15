@@ -3,8 +3,8 @@
 /* eslint-disable prefer-const */
 import "../styling/ToDoList.css";
 import { useEffect, useState } from "react";
-import { Note } from "../models/note";
-import { response } from "express";
+import { Note as NoteModels } from "../models/note";
+import Notes from "./Notes";
 
 type Task = {
   id: number;
@@ -26,21 +26,30 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
   const [editTaskTitle, setEditTaskTitle] = useState<string>("");
   const [editTaskDescription, setEditTaskDescription] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<NoteModels[]>([]);
+  const backendHost = "http://localhost:5000";
 
   useEffect(() => {
-    async function loadNotes() {
+    const loadNotes = async () => {
       try {
-        const response = await fetch("/api/notes", {
+        const response = await fetch(backendHost + "/api/notes", {
           method: "GET",
+          headers: { Accept: "application/json" },
         });
         const notes = await response.json();
         setNotes(notes);
+        console.log(JSON.stringify(notes));
+        if (response.status === 304) {
+          // Use cached data or handle accordingly
+          console.log("Using cached data for /api/notes");
+        }
       } catch (error) {
         console.error(error);
+        console.log(JSON.stringify(notes));
         alert(error);
       }
-    }
+    };
+
     loadNotes();
   }, []);
 
@@ -150,85 +159,21 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
         </div>
         {/* taskrow */}
         <div className="row">
-          <div className="col mt-3">
+          <div className="col mt-3 table-div">
             <table className="table">
+              {/* still finds a way */}
               <thead>
-                <tr>
+                <tr className="table-width">
                   <th className="col-1">TaskID</th>
-                  <th className="col-4">Task Title</th>
-                  <th className="col-4">Task Description</th>
-                  <th className="col-3">CRUD</th>
+                  <th className="col-2">Task Title</th>
+                  <th className="col-5">Task Description</th>
+                  <th className="col-4">Modified/Created</th>
                 </tr>
               </thead>
-              <tbody>
-                {tasks.map((task) => (
-                  <tr key={task.id}>
-                    <td>{task.id}</td>
-                    <td>
-                      {editTaskId === task.id ? (
-                        <input
-                          type="text"
-                          value={editTaskTitle}
-                          onChange={(e) => setEditTaskTitle(e.target.value)}
-                        />
-                      ) : (
-                        task.title
-                      )}
-                    </td>
-                    <td>
-                      {editTaskId === task.id ? (
-                        <input
-                          type="text"
-                          value={editTaskDescription}
-                          onChange={(e) =>
-                            setEditTaskDescription(e.target.value)
-                          }
-                        />
-                      ) : (
-                        task.description
-                      )}
-                    </td>
-                    <td>
-                      {editTaskId === task.id ? (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleTaskUpdate(
-                              task.id,
-                              editTaskTitle,
-                              editTaskDescription
-                            )
-                          }
-                          className="btn btn-success"
-                        >
-                          Save
-                        </button>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setEditTaskId(task.id);
-                            setEditTaskTitle(task.title);
-                            setEditTaskDescription(task.description);
-                          }}
-                          className="btn btn-warning"
-                        >
-                          Edit
-                        </button>
-                      )}
-                      <button
-                        type="button"
-                        onClick={() => handleTaskDelete(task.id)}
-                        className="btn btn-danger"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+              {notes.map((note) => (
+                <Notes note={note} key={note._id} />
+              ))}
             </table>
-            <div>{JSON.stringify(notes)}</div>
           </div>
         </div>
       </div>
