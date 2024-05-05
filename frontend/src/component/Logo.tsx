@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import "../styling/Nav.css";
 
@@ -6,7 +7,7 @@ const letters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 let currentIndex: number = 0;
 let currentWord: string = CorrectWord[currentIndex];
-let animationInterval: number;
+let animationInterval: any;
 
 function getRandomLetter(): string {
   return letters[Math.floor(Math.random() * 26)];
@@ -79,7 +80,8 @@ export default function Logo(): JSX.Element {
   }, []); // Empty dependency array to run only once on mount
 
   return (
-    <div className="logoContainer"
+    <div
+      className="logoContainer"
       style={{
         height: `${navbarHeight}px`,
         lineHeight: `${navbarHeight}px`,

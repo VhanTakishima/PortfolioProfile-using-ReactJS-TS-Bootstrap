@@ -6,7 +6,7 @@
   padding-left: 12px;
   position: fixed !important;
   left: 10vw;
-  top: 10vh;
+  top: 7vh;
   z-index: 10;
   /* From https://css.glass */
   background: rgba(0, 0, 0, 0.56);
@@ -28,10 +28,6 @@
 
 .todoclose {
   width: 100%;
-}
-
-.todoclose {
-  width: 100%;
   justify-content: end;
 }
 
@@ -43,11 +39,23 @@
   width: 100%;
 }
 
-.table-div {
-  height: 55vh;
+.table-div-default {
+  height: 50vh;
+  overflow-y: scroll;
+}
+
+.table-div-trimmed {
+  height: 41vh;
   overflow-y: scroll;
 }
 
 .table-width {
   overflow-x: hidden;
+}
+
+tr .selectedTable .highlighted {
+  background-color: blue !important;
+  color: white !important;
+  cursor: pointer;
+  font-style: bold;
 }/*# sourceMappingURL=ToDoList.css.map */

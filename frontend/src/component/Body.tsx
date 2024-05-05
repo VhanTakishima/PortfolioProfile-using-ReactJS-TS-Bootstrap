@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import "../styling/ThemeColor.css";
 import "../styling/Nav.css";
 import "../styling/Body.css";

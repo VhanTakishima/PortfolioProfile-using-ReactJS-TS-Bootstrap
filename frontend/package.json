@@ -2,7 +2,6 @@
   "name": "portfolio-profile",
   "private": true,
   "version": "0.0.0",
-  
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -23,6 +22,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.3",
     "react-multi-carousel": "^2.8.4",
     "react-simple-typewriter": "^5.0.1",
     "reactstrap": "^9.2.2"

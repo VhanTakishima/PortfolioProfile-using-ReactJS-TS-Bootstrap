@@ -8,11 +8,9 @@ import note from "../models/note";
 
 export const getNotes: RequestHandler = async (req, res, next) => {
   try {
+    // throw createHttpError(401);
+    // just for testing error
     const notes = await Notemodel.find().exec();
-    // const sanitizedNotes = notes.map((note) => ({
-    //   ...note.toObject(),
-    //   text: sanitizeHtml(note.text || ""), // Sanitize the 'text' property
-    // }));'
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(notes);
   } catch (error) {
