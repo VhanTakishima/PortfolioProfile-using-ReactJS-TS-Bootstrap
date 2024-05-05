@@ -21,10 +21,17 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
   const [noteToEdit, setNoteToEdit] = useState<NoteModels | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [tableSize, setTableSize] = useState<boolean>(false);
+  const [isBtnEnabled, setIsBtnEnabled] = useState<boolean>(false);
 
   useEffect(() => {
     console.log("showModal value:", showModal);
   }, [showModal]);
+
+  //para lang mag render agad
+  // useEffect(() => {
+  //   isBtnEnabled ? setIsBtnEnabled(true) : setIsBtnEnabled(false);
+  //   tableSize ? setTableSize(true) : setTableSize(false);
+  // });
 
   useEffect(() => {
     const loadNotes = async () => {
@@ -62,7 +69,7 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
       <div className="tododisplay col">
         <div className="row g-2 mt-2">
           <div className="col-10">
-            <h3 className="todotitle">
+            <h3 className="todotitle text-primary text-light">
               <i className="bi bi-card-checklist"></i> To-Do List
             </h3>
           </div>
@@ -77,6 +84,38 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
             </button>
           </div>
         </div>
+
+        {showModal && (
+          <div
+            className="modalfade"
+            id="showModal"
+            aria-labelledby="showModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-body">
+              {" "}
+              {noteToEdit && (
+                <AddEditNoteForm
+                  noteToEdit={noteToEdit}
+                  setTableSize={setTableSize}
+                  setIsBtnEnabled={setIsBtnEnabled}
+                  onNoteSaved={(updatedNote) => {
+                    setNotes(
+                      notes.map((existingNote) =>
+                        existingNote._id === updatedNote._id
+                          ? updatedNote
+                          : existingNote
+                      )
+                    );
+                    setNoteToEdit(null);
+                    setShowModal(false); // Close the modal after saving
+                  }}
+                />
+              )}
+            </div>
+          </div>
+        )}
+
         {noteToEdit && (
           <div className="row g-2 mt-2 ">
             <div className="col-6">
@@ -87,8 +126,10 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
                 onClick={() => {
                   setShowModal(true);
                   setTableSize(true);
+                  setIsBtnEnabled(true);
                   console.log("showmodel is " + showModal);
                 }}
+                disabled={isBtnEnabled}
               >
                 Edit Data{" "}
               </button>
@@ -100,6 +141,7 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
                   setNoteToEdit(null);
                   setShowModal(false);
                   setTableSize(false);
+                  setIsBtnEnabled(false);
                 }}
               >
                 Cancel
@@ -126,41 +168,15 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
             onNoteSaved={(newNote) => {
               setNotes([...notes, newNote]);
               setTableSize(false);
+              setIsBtnEnabled(false);
             }}
-            setTableSize={function (_state: boolean): void {
+            setTableSize={function (_state1: boolean): void {
+              throw new Error("Function not implemented.");
+            }}
+            setIsBtnEnabled={function (_state2: boolean): void {
               throw new Error("Function not implemented.");
             }}
           />
-        )}
-
-        {showModal && (
-          <div
-            className="modalfade"
-            id="showModal"
-            aria-labelledby="showModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-body">
-              {" "}
-              {noteToEdit && (
-                <AddEditNoteForm
-                  noteToEdit={noteToEdit}
-                  setTableSize={setTableSize}
-                  onNoteSaved={(updatedNote) => {
-                    setNotes(
-                      notes.map((existingNote) =>
-                        existingNote._id === updatedNote._id
-                          ? updatedNote
-                          : existingNote
-                      )
-                    );
-                    setNoteToEdit(null);
-                    setShowModal(false); // Close the modal after saving
-                  }}
-                />
-              )}
-            </div>
-          </div>
         )}
 
         {/* will add state and function to hide the previous AddEditNoteForm */}
@@ -208,10 +224,10 @@ function ToDoList({ isVisible, onClose }: ToDoListProps) {
               {/* still finds a way */}
               <thead>
                 <tr className="table-width">
-                  <th className="col-1">TaskID</th>
-                  <th className="col-2">Task Title</th>
-                  <th className="col-5">Task Description</th>
-                  <th className="col-4">Modified/Created</th>
+                  <th className="col-1  bg-primary">TaskID</th>
+                  <th className="col-2  bg-primary">Task Title</th>
+                  <th className="col-5  bg-primary">Task Description</th>
+                  <th className="col-4 bg-primary">Modified/Created</th>
                 </tr>
               </thead>
               {/* body component */}

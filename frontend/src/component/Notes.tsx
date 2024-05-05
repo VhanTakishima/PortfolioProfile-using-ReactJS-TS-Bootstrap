@@ -6,7 +6,7 @@ import { Note as NoteModels } from "../models/note";
 import { formatDate } from "../util/formatDate";
 import { MdDelete } from "react-icons/md";
 import { Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 interface NotesProps {
   note: NoteModels;
@@ -54,19 +54,29 @@ const Notes = ({
   const newIDForClient = objectIdToUniquePositiveNumber(_id);
   const [highlighted, setHighlighted] = useState(false);
 
-  useEffect(() => {
-    const tableRow = document.querySelector(
-      ".selectedTable"
-    ) as HTMLTableRowElement;
+  const cacheHighlightHover = useMemo(
+    () => ({
+      onMouseEnter: () => setHighlighted(true),
+      onMouseLeave: () => setHighlighted(false),
+    }),
+    [setHighlighted]
+  );
+  const tableRow: HTMLTableRowElement | null =
+    document.querySelector(".selectedTable");
+
+  const cacheAddRemoveClass = useMemo(() => {
     if (tableRow) {
       if (highlighted) {
-        tableRow.classList.add("highlighted");
-        tableRow.style.backgroundColor = "blue";
-        console.log("hovered");
+        tableRow.classList.add("bg-secondary");
       } else {
-        tableRow.classList.remove("highlighted");
-        console.log("unhovereed ");
+        tableRow.classList.remove("bg-secondary");
       }
+    }
+  }, [highlighted]);
+
+  useEffect(() => {
+    {
+      cacheAddRemoveClass;
     }
   }, [highlighted]);
 
@@ -78,14 +88,20 @@ const Notes = ({
           onClick={() => {
             onNoteClicked(note);
           }}
-          className={highlighted ? "selectedTable" : ""}
-          onMouseEnter={() => setHighlighted(true)}
-          onMouseLeave={() => setHighlighted(false)}
+          // onMouseEnter={() => setHighlighted(true)}
+          // onMouseLeave={() => setHighlighted(false)}
+          {...cacheHighlightHover}
         >
-          <td>{newIDForClient} </td>
-          <td>{title} </td>
-          <td>{text}</td>
-          <td>
+          <td className={highlighted ? "selectedTable bg-secondary" : ""}>
+            {newIDForClient}{" "}
+          </td>
+          <td className={highlighted ? "selectedTable bg-secondary" : ""}>
+            {title}{" "}
+          </td>
+          <td className={highlighted ? "selectedTable bg-secondary" : ""}>
+            {text}
+          </td>
+          <td className={highlighted ? "selectedTable bg-secondary" : ""}>
             <Button
               className="text-white me-2"
               onClick={(e) => {

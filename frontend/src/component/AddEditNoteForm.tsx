@@ -8,12 +8,14 @@ import * as NotesApi from "../network/notes_api";
 interface AddEditNoteProps {
   noteToEdit?: Note;
   onNoteSaved: (note: Note) => void;
-  setTableSize: (_state: boolean) => void;
+  setTableSize: (_state1: boolean) => void;
+  setIsBtnEnabled: (_state2: boolean) => void;
 }
 const AddNoteForm = ({
   onNoteSaved,
   noteToEdit,
   setTableSize,
+  setIsBtnEnabled,
 }: AddEditNoteProps) => {
   const {
     register,
@@ -38,6 +40,7 @@ const AddNoteForm = ({
       onNoteSaved(noteResponse);
       resetForm();
       setTableSize(false);
+      setIsBtnEnabled(false);
     } catch (error) {
       console.error(error);
     }

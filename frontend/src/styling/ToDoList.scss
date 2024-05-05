@@ -47,9 +47,7 @@ backdrop-filter: blur(7.2px);
     overflow-x: hidden;
 }
 
-tr .selectedTable .highlighted{
-    background-color: blue !important;
-    color: white !important;
+.selectedTable {
     cursor: pointer;
     font-style:bold;
 }
