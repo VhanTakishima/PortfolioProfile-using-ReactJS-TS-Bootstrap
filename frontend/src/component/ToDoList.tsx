@@ -4,7 +4,7 @@
 /* eslint-disable prefer-const */
 import "../styling/ToDoList.css";
 import "../styling/Notes.css";
-import { useDebugValue, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { Note as NoteModels } from "../models/note";
 import Notes from "./Notes";
 import AddEditNoteForm from "./AddEditNoteForm";

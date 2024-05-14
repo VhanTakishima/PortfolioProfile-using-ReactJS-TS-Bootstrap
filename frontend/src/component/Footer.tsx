@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { useState } from "react";
 import "../styling/Footer.css";
 

@@ -1,6 +1,7 @@
 import "../styling/Miniproject.css";
 import Calculathor from "./Calculathor";
 import ToDoList from "./ToDoList";
+import MinesMorales from "./Mines";
 import { useState } from "react";
 
 type Project = {
@@ -15,6 +16,7 @@ type Project = {
 function Miniproject() {
   const [isCalculathorVisible, setIsCalculathorVisible] = useState(false);
   const [isToDoListVisible, setToDoListVisible] = useState(false);
+  const [isMinesVisible, setMinesVisible] = useState(false);
   // const [visibleComponent, setVisibleComponent] =
   //   useState<React.ReactNode | null>(null);
 
@@ -30,9 +32,10 @@ function Miniproject() {
     {
       key: 1,
       id: 1,
-      title: "Ceasar Cipher",
-      imgurl: "src/assets/Cipher2.png",
-      description: " Encrypt/Decrypt using Ceasar Cipher",
+      title: "Mines Morales",
+      imgurl: "src/assets/mines-banner-01.png",
+      description:
+        " Play Mines(currently WIP) change in Miniprojects when finished ",
       btnLink: "#",
     },
     {
@@ -71,11 +74,19 @@ function Miniproject() {
   const toggleCalculathorVisibility = () => {
     setIsCalculathorVisible(!isCalculathorVisible);
     setToDoListVisible(false); // Close ToDoList when opening Calculathor
+    setMinesVisible(false);
   };
 
   const toggleToDoListVisibility = () => {
     setToDoListVisible(!isToDoListVisible);
     setIsCalculathorVisible(false); // Close Calculathor when opening ToDoList
+    setMinesVisible(false);
+  };
+
+  const toggleMinesVisibility = () => {
+    setMinesVisible(!isMinesVisible);
+    setIsCalculathorVisible(false);
+    setToDoListVisible(false);
   };
 
   const handleButtonClick = (project: Project) => {
@@ -85,6 +96,9 @@ function Miniproject() {
         break;
       case "To-do List":
         toggleToDoListVisibility();
+        break;
+      case "Mines Morales":
+        toggleMinesVisibility();
         break;
       default:
         break;
@@ -186,6 +200,12 @@ function Miniproject() {
           <ToDoList
             isVisible={isToDoListVisible}
             onClose={toggleToDoListVisibility}
+          />
+        )}
+        {isMinesVisible && (
+          <MinesMorales
+            isVisible={isMinesVisible}
+            onClose={toggleMinesVisibility}
           />
         )}
       </div>

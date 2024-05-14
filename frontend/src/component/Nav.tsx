@@ -1,6 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import "../styling/Nav.css";
 import Logo from "./Logo";
+import { User as UserModel } from "../models/user";
+import LoginModal from "./LoginModal.tsx";
 
 type Theme =
   | "Cerulean"
@@ -17,12 +21,17 @@ type Theme =
   | "Yeti"
   | "Flatly";
 
-function Nav() {
+interface UserProps {
+  user: UserModel;
+}
+
+function Nav({ user }: UserProps) {
   const storedTheme: Theme =
     (localStorage.getItem("selectedTheme") as Theme) || "Cerulean";
 
   const [selectedTheme, setSelectedTheme] = useState<Theme>(storedTheme);
-
+  const [authenticatedUser, setAuthenticatedUser] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const themeColors: Theme[] = [
     "Cerulean",
     "Darkly",
@@ -37,6 +46,12 @@ function Nav() {
     "Yeti",
     "Flatly",
   ];
+
+  const loginModalHandler = () => {
+    if (!authenticatedUser) {
+      setShowLoginModal(true);
+    }
+  };
 
   const handleThemeChange = (theme: Theme) => {
     const oldLink = document.getElementById("theme-stylesheet");
@@ -60,6 +75,18 @@ function Nav() {
     console.log(selectedTheme);
   }, []);
 
+  useEffect(() => {
+    if (showLoginModal && !authenticatedUser) {
+      // Example: Trigger API call to fetch user data
+      // If the user is not authenticated, you can show the login modal
+      // You can also add other conditions here if necessary
+    }
+  }, [showLoginModal, authenticatedUser]);
+
+  const showLoginButtonHandler = () => {
+    !authenticatedUser ? setShowLoginModal(true) : undefined;
+    console.log("this should show the modal" + showLoginModal);
+  };
   const themeHandler = themeColors.map((theme) => (
     <a
       key={theme}
@@ -70,6 +97,10 @@ function Nav() {
       {theme}
     </a>
   ));
+
+  const handleClose = () => {
+    setShowLoginModal(false); 
+  };
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-primary">
@@ -124,13 +155,16 @@ function Nav() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Admin Page
+              <a className="nav-link" href="#" onClick={showLoginButtonHandler}>
+                {!authenticatedUser ? "Guest" : "Logged In"}
               </a>
             </li>
           </ul>
         </div>
       </div>
+      {showLoginModal && (
+        <LoginModal isVisible={showLoginModal} handleClose={handleClose} />
+      )}
     </nav>
   );
 }

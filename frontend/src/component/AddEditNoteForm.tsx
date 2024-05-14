@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Note } from "../models/note";
 import { NoteInput } from "../network/notes_api";
 import * as NotesApi from "../network/notes_api";
+import TextInputField from "./form/TextInputField";
 
 interface AddEditNoteProps {
   noteToEdit?: Note;
@@ -56,6 +57,16 @@ const AddNoteForm = ({
         id="addEditNoteForm"
         onSubmit={handleSubmit(onSubmit)}
       >
+        {/* <TextInputField
+          name="title"
+          label="title"
+          type="text"
+          placeholder="title"
+          register={register}
+          registerOptions={{ required: "Required" }}
+          error={errors.title}
+        /> */}
+
         <FormGroup className="col-3">
           <Form.Control
             type="text"
