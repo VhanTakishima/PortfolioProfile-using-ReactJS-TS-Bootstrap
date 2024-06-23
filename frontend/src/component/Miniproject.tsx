@@ -2,6 +2,7 @@ import "../styling/Miniproject.css";
 import Calculathor from "./Calculathor";
 import ToDoList from "./ToDoList";
 import MinesMorales from "./Mines";
+import RockPaperScissor from "./RockPaperScissor";
 import { useState } from "react";
 
 type Project = {
@@ -17,6 +18,8 @@ function Miniproject() {
   const [isCalculathorVisible, setIsCalculathorVisible] = useState(false);
   const [isToDoListVisible, setToDoListVisible] = useState(false);
   const [isMinesVisible, setMinesVisible] = useState(false);
+  const [isRockPaperScissorVisible, setRockPaperScissorVisible] =
+    useState(false);
   // const [visibleComponent, setVisibleComponent] =
   //   useState<React.ReactNode | null>(null);
 
@@ -49,9 +52,9 @@ function Miniproject() {
     {
       key: 3,
       id: 3,
-      title: "Calculathor",
-      imgurl: "src/assets/Calcu.jpg",
-      description: " Simple calculator mini project",
+      title: "RockPaperScissor",
+      imgurl: "src/assets/rpsbanner.png",
+      description: "Simple Rock Paper Scissor Game",
       btnLink: "#",
     },
     {
@@ -75,18 +78,28 @@ function Miniproject() {
     setIsCalculathorVisible(!isCalculathorVisible);
     setToDoListVisible(false); // Close ToDoList when opening Calculathor
     setMinesVisible(false);
+    setRockPaperScissorVisible(false);
   };
 
   const toggleToDoListVisibility = () => {
     setToDoListVisible(!isToDoListVisible);
     setIsCalculathorVisible(false); // Close Calculathor when opening ToDoList
     setMinesVisible(false);
+    setRockPaperScissorVisible(false);
   };
 
   const toggleMinesVisibility = () => {
     setMinesVisible(!isMinesVisible);
     setIsCalculathorVisible(false);
     setToDoListVisible(false);
+    setRockPaperScissorVisible(false);
+  };
+
+  const toggleRockPaperScissorVisibility = () => {
+    setRockPaperScissorVisible(!isRockPaperScissorVisible);
+    setIsCalculathorVisible(false);
+    setToDoListVisible(false);
+    setMinesVisible(false);
   };
 
   const handleButtonClick = (project: Project) => {
@@ -99,6 +112,9 @@ function Miniproject() {
         break;
       case "Mines Morales":
         toggleMinesVisibility();
+        break;
+      case "RockPaperScissor":
+        toggleRockPaperScissorVisibility();
         break;
       default:
         break;
@@ -206,6 +222,12 @@ function Miniproject() {
           <MinesMorales
             isVisible={isMinesVisible}
             onClose={toggleMinesVisibility}
+          />
+        )}
+        {isRockPaperScissorVisible && (
+          <RockPaperScissor
+            isVisible={isRockPaperScissorVisible}
+            onClose={toggleRockPaperScissorVisibility}
           />
         )}
       </div>

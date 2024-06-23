@@ -33,7 +33,7 @@ function App({ user }: UserProps) {
   return (
     // <div className="text-bg-secondary-emphasis bg-gradient">
     <div>
-      <Nav user={user} />
+      <Nav loggedInUser={null} onLoggedOutSucessful={() => {}} />
       <Body />
       <Miniproject />
       {/* {isCalculathorVisible && (

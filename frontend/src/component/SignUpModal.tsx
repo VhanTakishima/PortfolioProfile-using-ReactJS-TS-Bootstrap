@@ -2,43 +2,47 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { User } from "../models/user";
-import { LoginCredentials } from "../network/notes_api";
+import { SignUpCredentials } from "../network/notes_api";
 import * as NotesApi from "../network/notes_api";
 import { useForm } from "react-hook-form";
 import TextInputField from "./form/TextInputField";
 
-interface LoginModalProps {
+interface SignUpModalProps {
   onDismiss: () => void;
-  OnLoginSuccessful: (user: User) => void;
+  OnSignUpSuccessful: (user: User) => void;
 }
 
-export const LoginModal = ({
+export const SignUpModal = ({
   onDismiss,
-  OnLoginSuccessful,
-}: LoginModalProps) => {
-  const [show, setShow] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
-
+  OnSignUpSuccessful,
+}: SignUpModalProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginCredentials>();
+  } = useForm<SignUpCredentials>();
 
-  async function onSubmit(credentials: LoginCredentials) {
+  async function onSubmit(credentials: SignUpCredentials) {
     try {
-      const loggedUser = await NotesApi.login(credentials);
-      OnLoginSuccessful(loggedUser);
+      const newUser = await NotesApi.login(credentials);
+      OnSignUpSuccessful(newUser);
     } catch (error) {
       alert(error);
       console.error(error);
     }
   }
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group className="row justify-content-center align-baseline mt-0 ms-4 me-4 mb-3">
+        <TextInputField
+          name="email"
+          label="Email"
+          type="email"
+          placeholder="Enter Email Address"
+          register={register}
+          registerOptions={{ required: "Required" }}
+          error={errors.email}
+        ></TextInputField>
         <TextInputField
           name="username"
           label="Username"
@@ -63,11 +67,11 @@ export const LoginModal = ({
           type="submit"
           disabled={isSubmitting}
         >
-          Login
+          Sign-up
         </Button>
       </Form.Group>
     </Form>
   );
 };
 
-export default LoginModal;
+export default SignUpModal;

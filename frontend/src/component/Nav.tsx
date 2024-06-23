@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import "../styling/Nav.css";
 import Logo from "./Logo";
-import { User as UserModel } from "../models/user";
+import { User } from "../models/user";
 import LoginModal from "./LoginModal.tsx";
+import LoginForm from "./LoginForm.tsx";
 
 type Theme =
   | "Cerulean"
@@ -21,11 +22,12 @@ type Theme =
   | "Yeti"
   | "Flatly";
 
-interface UserProps {
-  user: UserModel;
+interface NavBarProps {
+  loggedInUser: User | null;
+  onLoggedOutSucessful: () => void;
 }
-
-function Nav({ user }: UserProps) {
+// to be put on Nav() later { loggedInUser, onLoggedOutSucessful }: NavBarProps
+function Nav() {
   const storedTheme: Theme =
     (localStorage.getItem("selectedTheme") as Theme) || "Cerulean";
 
@@ -99,7 +101,7 @@ function Nav({ user }: UserProps) {
   ));
 
   const handleClose = () => {
-    setShowLoginModal(false); 
+    setShowLoginModal(false);
   };
 
   return (
@@ -163,7 +165,7 @@ function Nav({ user }: UserProps) {
         </div>
       </div>
       {showLoginModal && (
-        <LoginModal isVisible={showLoginModal} handleClose={handleClose} />
+        <LoginForm isVisible={showLoginModal} handleClose={handleClose} />
       )}
     </nav>
   );

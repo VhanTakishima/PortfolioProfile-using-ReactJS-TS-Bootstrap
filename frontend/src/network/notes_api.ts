@@ -44,7 +44,7 @@ export interface LoginCredentials {
   password: string;
 }
 
-export async function Login(credentials: LoginCredentials): Promise<User> {
+export async function login(credentials: LoginCredentials): Promise<User> {
   const response = await fetchData(backendHost + "/api/users/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
