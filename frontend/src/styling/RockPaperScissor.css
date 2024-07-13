@@ -17,21 +17,18 @@
 }
 
 .titlearea {
-  border: solid lime 2px;
+  padding-top: 1%;
 }
 
 .gamearea {
-  border: solid lime 2px;
   height: 80%;
 }
 
 .selector {
-  border: solid lime 2px;
   width: 70%;
 }
 
-.reel {
-  border: solid lime 2px;
+.reelcomputer {
   background-image: url("src/assets/rpsslot.png");
   background-repeat: repeat-y;
   background-size: cover;
@@ -42,7 +39,6 @@
 }
 
 .reelplayer {
-  border: solid lime 2px;
   background-image: url("src/assets/rpsslot.png");
   background-repeat: repeat-y;
   background-size: cover;
@@ -50,4 +46,23 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+@media screen and (max-width: 1199px) {
+  .gamearea {
+    height: 70%;
+    width: auto;
+  }
+}
+@media screen and (max-width: 991px) {
+  .gamearea {
+    height: 50%;
+    width: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .gamearea {
+    height: 39%;
+    width: auto;
+  }
 }/*# sourceMappingURL=RockPaperScissor.css.map */

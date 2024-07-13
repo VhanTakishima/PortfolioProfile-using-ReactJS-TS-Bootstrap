@@ -17,21 +17,22 @@ backdrop-filter: blur(7.6px);
 }
 
 .titlearea{
- border: solid lime 2px;
+//  border: solid lime 2px;
+padding-top:1%;
 
 }
 .gamearea{
-    border: solid lime 2px;
+    // border: solid lime 2px;
 height: 80%;
 }
 .selector{
-    border: solid lime 2px; 
+    // border: solid lime 2px; 
     width: 70%;
     
 }
 
-.reel{
-    border: solid lime 2px;
+.reelcomputer{
+    // border: solid lime 2px;
     background-image:url("src/assets/rpsslot.png");
     background-repeat: repeat-y;
     background-size: cover;
@@ -43,7 +44,7 @@ height: 80%;
 
 
 .reelplayer{
-    border: solid lime 2px;
+    // border: solid lime 2px;
     background-image:url("src/assets/rpsslot.png");
     background-repeat: repeat-y;
     background-size: cover;
@@ -52,3 +53,29 @@ height: 80%;
     height:100%;
     overflow: hidden;
 }
+@media screen and (max-width: 1199px) {
+    .gamearea {
+    //   background-size:cover; 
+    height: 70%;
+    width: auto;
+    }
+  }
+
+
+  @media screen and (max-width: 991px) {
+    .gamearea {
+    //   background-size: auto 200%; 
+    height: 50%;
+    width: auto;
+    }
+
+  }
+
+  @media screen and (max-width: 767px) {
+    .gamearea {
+        //   background-size: auto 200%; 
+        height:39%;
+        width: auto;
+        }
+    
+  }
