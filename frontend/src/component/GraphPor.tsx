@@ -22,8 +22,8 @@ function GraphPor({ isVisible, onClose }: GraphPorProps) {
             </button>
           </div>
           <div className="col-11">
-            These section is my previous work for the player of the game
-            Torn.com
+            These section is my previous work for the players who hired me in
+            the game Torn.com
           </div>
         </div>
 
