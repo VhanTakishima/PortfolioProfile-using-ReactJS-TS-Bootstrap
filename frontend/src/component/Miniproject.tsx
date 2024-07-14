@@ -1,7 +1,7 @@
 import "../styling/Miniproject.css";
 import Calculathor from "./Calculathor";
 import ToDoList from "./ToDoList";
-import MinesMorales from "./Mines";
+import GraphPor from "./GraphPor";
 import RockPaperScissor from "./RockPaperScissor";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ type Project = {
 function Miniproject() {
   const [isCalculathorVisible, setIsCalculathorVisible] = useState(false);
   const [isToDoListVisible, setToDoListVisible] = useState(false);
-  const [isMinesVisible, setMinesVisible] = useState(false);
+  const [isGraphPorVisible, setGraphPorVisible] = useState(false);
   const [isRockPaperScissorVisible, setRockPaperScissorVisible] =
     useState(false);
   // const [visibleComponent, setVisibleComponent] =
@@ -35,10 +35,10 @@ function Miniproject() {
     {
       key: 1,
       id: 1,
-      title: "Mines Morales",
-      imgurl: "src/assets/mines-banner-01.png",
+      title: "Graphic Portfolio",
+      imgurl: "src/assets/graphicportfolio.png",
       description:
-        " Play Mines(currently WIP) change in Miniprojects when finished ",
+        " Check out my Graphic Portfolio (currently WIP) change in Miniprojects when finished ",
       btnLink: "#",
     },
     {
@@ -77,19 +77,19 @@ function Miniproject() {
   const toggleCalculathorVisibility = () => {
     setIsCalculathorVisible(!isCalculathorVisible);
     setToDoListVisible(false); // Close ToDoList when opening Calculathor
-    setMinesVisible(false);
+    setGraphPorVisible(false);
     setRockPaperScissorVisible(false);
   };
 
   const toggleToDoListVisibility = () => {
     setToDoListVisible(!isToDoListVisible);
     setIsCalculathorVisible(false); // Close Calculathor when opening ToDoList
-    setMinesVisible(false);
+    setGraphPorVisible(false);
     setRockPaperScissorVisible(false);
   };
 
-  const toggleMinesVisibility = () => {
-    setMinesVisible(!isMinesVisible);
+  const toggleGraphPorVisibility = () => {
+    setGraphPorVisible(!isGraphPorVisible);
     setIsCalculathorVisible(false);
     setToDoListVisible(false);
     setRockPaperScissorVisible(false);
@@ -99,7 +99,7 @@ function Miniproject() {
     setRockPaperScissorVisible(!isRockPaperScissorVisible);
     setIsCalculathorVisible(false);
     setToDoListVisible(false);
-    setMinesVisible(false);
+    setGraphPorVisible(false);
   };
 
   const handleButtonClick = (project: Project) => {
@@ -110,8 +110,8 @@ function Miniproject() {
       case "To-do List":
         toggleToDoListVisibility();
         break;
-      case "Mines Morales":
-        toggleMinesVisibility();
+      case "Graphic Portfolio":
+        toggleGraphPorVisibility();
         break;
       case "RockPaperScissor":
         toggleRockPaperScissorVisibility();
@@ -218,10 +218,10 @@ function Miniproject() {
             onClose={toggleToDoListVisibility}
           />
         )}
-        {isMinesVisible && (
-          <MinesMorales
-            isVisible={isMinesVisible}
-            onClose={toggleMinesVisibility}
+        {isGraphPorVisible && (
+          <GraphPor
+            isVisible={isGraphPorVisible}
+            onClose={toggleGraphPorVisibility}
           />
         )}
         {isRockPaperScissorVisible && (
